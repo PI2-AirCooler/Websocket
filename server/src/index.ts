@@ -9,6 +9,10 @@ const mysocket = new socketio.Server(httpServer);
 mysocket.on('connection', (socket) => {
   console.log('New Connection: ' + socket.id);
 
+  socket.on('event', (json) => {
+    socket.broadcast.emit('event', json);
+  });
+
   socket.on("disconnect", (reason) => {
     console.log("Disconnected: " + reason);
   });
